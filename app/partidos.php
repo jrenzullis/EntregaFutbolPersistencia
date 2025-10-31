@@ -44,11 +44,7 @@ $partidos = $partidoDAO->selectByJornada($jornada);
     <meta charset="UTF-8">
     <title>Partidos - Jornada <?= $jornada ?></title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        body { background-color: #f0f2f5; }
-        .card-partido { transition: transform 0.2s; }
-        .card-partido:hover { transform: scale(1.02); }
-    </style>
+    
 </head>
 <body>
 <div class="container py-5">

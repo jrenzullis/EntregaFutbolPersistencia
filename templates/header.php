@@ -24,7 +24,7 @@
 <body> 
     <!-- Menú para invitado -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <a class="navbar-brand" href="./index.php">Fubol LaLiga</a>
+      <a class="navbar-brand" href="../index.php">Fubol LaLiga</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
               data-bs-target="#navbarMenu" aria-controls="navbarMenu"
               aria-expanded="false" aria-label="Toggle navigation">
@@ -34,10 +34,10 @@
       <div class="collapse navbar-collapse" id="navbarMenu">
         <ul class="navbar-nav me-auto">
           <li class="nav-item">
-            <a class="nav-link" href="app/signup.php">Equipos</a>
+            <a class="nav-link" href="../app/equipos.php">Equipos</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="app/login.php">Partidos</a>
+            <a class="nav-link" href="../app/partidos.php">Partidos</a>
           </li>
         </ul>
       </div>

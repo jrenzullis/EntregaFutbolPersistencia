@@ -1,4 +1,7 @@
 <?php
+
+
+
 $basePath = $_SERVER['DOCUMENT_ROOT'] . '/FutbolEntrega';
 
 require_once $basePath . '/persistence/DAO/EquiposDAO.php';
@@ -29,15 +32,6 @@ $equipos = $dao->selectAll();
     <meta charset="UTF-8">
     <title>Equipos - Artean</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        body { background-color: #f0f2f5; }
-        .team-card { transition: transform 0.2s; }
-        .team-card:hover { transform: scale(1.03); }
-        .team-name { font-weight: 600; }
-        .team-stadium { color: #555; }
-        .add-team-card { background-color: #0d6efd; color: white; cursor: pointer; transition: background 0.2s; }
-        .add-team-card:hover { background-color: #0b5ed7; }
-    </style>
 </head>
 <body>
 <div class="container py-5">
