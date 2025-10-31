@@ -1,6 +1,6 @@
 <?php
 
-$basePath = $_SERVER['DOCUMENT_ROOT'] . '/FUTBOLENTREGA';
+$basePath = $_SERVER['DOCUMENT_ROOT'] . '/FutbolEntrega';
 
 require_once $basePath . '/persistence/conf/PersistentManager.php';
 
@@ -16,3 +16,4 @@ abstract class GenericDAO {
 
 
 }
+?>

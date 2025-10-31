@@ -1,5 +1,5 @@
 <?php
-require 'GenericDAO.php';
+require 'genericDAO.php';
 
 class PartidoDAO extends GenericDAO {
 
