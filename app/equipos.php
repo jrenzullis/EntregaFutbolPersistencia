@@ -2,11 +2,13 @@
 $basePath = $_SERVER['DOCUMENT_ROOT'] . '/FutbolEntrega';
 
 require_once $basePath . '/persistence/DAO/EquiposDAO.php';
+require_once $basePath . '/templates/header.php';
+
 
 // Crear instancia del DAO
 $dao = new EquipoDAO();
 
-// 🔹 Insertar nuevo equipo si se envió el formulario
+// Insertar nuevo equipo si se envió el formulario
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $nombre = $_POST['nombre'] ?? '';
     $estadio = $_POST['estadio'] ?? '';
@@ -18,7 +20,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-// 🔹 Obtener todos los equipos
 $equipos = $dao->selectAll();
 ?>
 
@@ -27,69 +28,69 @@ $equipos = $dao->selectAll();
 <head>
     <meta charset="UTF-8">
     <title>Equipos - Artean</title>
-    <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { background-color: #f0f2f5; }
+        .team-card { transition: transform 0.2s; }
+        .team-card:hover { transform: scale(1.03); }
+        .team-name { font-weight: 600; }
+        .team-stadium { color: #555; }
+        .add-team-card { background-color: #0d6efd; color: white; cursor: pointer; transition: background 0.2s; }
+        .add-team-card:hover { background-color: #0b5ed7; }
+    </style>
 </head>
-<body class="bg-light">
-
+<body>
 <div class="container py-5">
-    <h1 class="mb-4">Equipos</h1>
 
-    <!-- Formulario para agregar equipo -->
-    <div class="card mb-4 shadow-sm">
-        <div class="card-body">
-            <form method="POST" class="row g-3 align-items-end">
-                <div class="col-md-5">
-                    <label for="nombre" class="form-label">Nombre del equipo</label>
-                    <input type="text" name="nombre" id="nombre" class="form-control" placeholder="Ej: Athletic Club" required>
+    <h1 class="mb-4 text-center">Equipos</h1>
+
+    <!-- Tarjeta de agregar nuevo equipo -->
+    <div class="row mb-4">
+        <div class="col-md-4 offset-md-4">
+            <div class="card add-team-card p-3 shadow" data-bs-toggle="collapse" data-bs-target="#addTeamForm">
+                <div class="text-center">➕ Agregar nuevo equipo</div>
+            </div>
+            <div class="collapse mt-3" id="addTeamForm">
+                <div class="card p-3 shadow-sm">
+                    <form method="POST" class="row g-2">
+                        <div class="col-12">
+                            <input type="text" name="nombre" class="form-control" placeholder="Nombre del equipo" required>
+                        </div>
+                        <div class="col-12">
+                            <input type="text" name="estadio" class="form-control" placeholder="Estadio" required>
+                        </div>
+                        <div class="col-12 text-center">
+                            <button type="submit" class="btn btn-success w-100">Guardar equipo</button>
+                        </div>
+                    </form>
                 </div>
-                <div class="col-md-5">
-                    <label for="estadio" class="form-label">Estadio</label>
-                    <input type="text" name="estadio" id="estadio" class="form-control" placeholder="Ej: San Mamés" required>
-                </div>
-                <div class="col-md-2">
-                    <button type="submit" class="btn btn-primary w-100">Agregar</button>
-                </div>
-            </form>
+            </div>
         </div>
     </div>
 
-    <!-- Tabla de equipos -->
-    <div class="card shadow-sm">
-        <div class="card-body">
-            <table class="table table-striped table-hover">
-                <thead class="table-dark">
-                    <tr>
-                        <th>ID</th>
-                        <th>Nombre</th>
-                        <th>Estadio</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php foreach ($equipos as $e): ?>
-                        <tr>
-                            <td><?= $e['id_equipo'] ?></td>
-                            <td>
-                                <a href="partidosEquipo.php?id=<?= $e['id_equipo'] ?>" class="text-decoration-none">
-                                    <?= htmlspecialchars($e['nombre']) ?>
-                                </a>
-                            </td>
-                            <td><?= htmlspecialchars($e['estadio']) ?></td>
-                        </tr>
-                    <?php endforeach; ?>
-                    <?php if (empty($equipos)): ?>
-                        <tr>
-                            <td colspan="3" class="text-center">No hay equipos registrados.</td>
-                        </tr>
-                    <?php endif; ?>
-                </tbody>
-            </table>
-        </div>
+    <!-- Grid de equipos -->
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        <?php if (!empty($equipos)): ?>
+            <?php foreach ($equipos as $e): ?>
+                <div class="col">
+                    <div class="card team-card h-100 shadow-sm">
+                        <div class="card-body text-center">
+                            <h5 class="team-name"><?= htmlspecialchars($e['nombre']) ?></h5>
+                            <p class="team-stadium"><?= htmlspecialchars($e['estadio']) ?></p>
+                            <a href="partidosEquipo.php?id=<?= $e['id_equipo'] ?>" class="btn btn-primary mt-2">Ver partidos</a>
+                        </div>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+        <?php else: ?>
+            <div class="col">
+                <div class="alert alert-warning text-center">No hay equipos registrados.</div>
+            </div>
+        <?php endif; ?>
     </div>
+
 </div>
 
-<!-- Bootstrap 5 JS (opcional) -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
 </body>
 </html>

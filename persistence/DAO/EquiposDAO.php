@@ -1,5 +1,5 @@
 <?php
-require 'genericDAO.php';
+require_once 'genericDAO.php';
 
 class EquipoDAO extends GenericDAO {
 
